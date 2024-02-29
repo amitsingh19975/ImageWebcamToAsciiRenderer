@@ -5,7 +5,7 @@ function rgbToBrightness(r: number, g: number, b: number): number {
 }
 
 function brightnessToAscii(brightness: number): string {
-    const ascii = '@%#*+=-:. '
+    const ascii = '@%#*+=-:. '.split('').reverse()
     return ascii[Math.floor(brightness * (ascii.length - 1))]
 }
 
