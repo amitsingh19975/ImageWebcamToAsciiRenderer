@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="./src/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ascii</title>
+  </head>
+  <body>
+    <div class="bg-zinc-900 w-full h-full flex flex-col">
+        <header class="flex-grow-0">
+            <h1 class="text-white p-4 flex justify-center items-baseline">
+                <span class="text-4xl font-bold italic">A</span>
+                <span class="text-2xl tracking-widest">scii</span>
+            </h1>
+        </header>
+        <main class="flex-1">
+            <div role="tablist" class="tab-list">
+                <a href="#upload" role="tab" class="tab" aria-selected="true">Upload</a>
+                <a href="#webcam" role="tab" class="tab active" aria-selected="false">Webcam</a>
+            </div>
+            <section id="upload" role="tabpanel" class="tab-panel" aria-labelledby="upload-tab" hidden>
+                <button id="upload-btn" class="border px-2 py-1 hover:bg-zinc-700 active:bg-zinc-800 w-[8ch] flex-grow-0">Convert</button>
+                <pre class="flex-1 max-w-[90vw] max-h-[70vh] overflow-auto"></pre>
+            </section>
+            <section id="webcam" role="tabpanel" class="tab-panel gap-1" aria-labelledby="webcam-tab">
+                <button id="webcam-btn" class="border px-2 py-1 hover:bg-zinc-700 active:bg-zinc-800 w-[8ch] flex-grow-0">Start</button>
+                <pre class="flex-1 max-w-[90vw] max-h-[70vh] overflow-auto"></pre>
+            </section>
+            <section id="error" role="alert" class="error-section" hidden>
+                <h2 class="text-5xl font-bold text-rose-400 uppercase tracking-wider">Error</h2>
+                <p id="error-msg" class="text-xl opacity-80"></p>
+            </section>
+        </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

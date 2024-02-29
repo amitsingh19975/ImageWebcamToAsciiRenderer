@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    color-scheme: dark;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    @apply bg-zinc-900 text-white;
+}
+
+.tab-list {
+    @apply flex justify-center;
+}
+
+.tab-list > .tab {
+    @apply text-white py-2 px-4 border w-[12ch] text-center border-zinc-700 transition-colors;
+    @apply hover:bg-zinc-700 active:bg-zinc-800;
+}
+
+.tab-list > .tab:first-child {
+    @apply border-r-transparent;
+}
+
+.tab-list > .tab:last-child {
+    @apply border-l-transparent;
+}
+
+.tab-list > .tab.active {
+    @apply bg-zinc-600;
+}
+
+main {
+    @apply grid justify-items-center gap-4 p-4;
+    grid-template-rows: auto 1fr;
+}
+
+.tab-panel:not([hidden]) {
+    @apply flex justify-center flex-col items-center;
+}
+
+.error-section:not([hidden]) {
+    @apply flex justify-center items-center max-w-[70ch] flex-col text-center
+}
