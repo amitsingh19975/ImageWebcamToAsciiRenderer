@@ -1,4 +1,5 @@
 import { fileToAscii, imageToAscii } from './ascii';
+import videoPlayer from './videoPlayer';
 import webcam from './webcam';
 
 const uploadTabEl = document.querySelector<HTMLAnchorElement>('a[href="#upload"]');
@@ -46,6 +47,55 @@ function getCurrentHash(): string | undefined {
     return link
 }
 
+function onSampleButtonClick() {
+    if (!uploadSection) return
+    const button = document.getElementById('sample-video-btn') as HTMLButtonElement | null;
+    if (!button) return
+    try {
+        onSampleButtonStop();
+        const preEl = uploadSection.querySelector('pre')
+        if (!preEl) return
+        preEl.style.fontSize = '';
+        preEl.textContent = 'Loading...'
+        const url = './sample.mp4';
+        videoPlayer.addFrameListener((frame) => {
+            const asciiStr = imageToAscii(frame, videoPlayer.width, videoPlayer.height)
+            preEl.textContent = asciiStr
+            preEl.style.fontSize = `${3}px`;
+        });
+        videoPlayer.init(400, 300, url);
+        videoPlayer.start();
+        
+        button.onclick = onSampleButtonStop;
+        button.textContent = 'Stop';
+        
+    } catch (error) {
+        onError(error)
+    }
+}
+
+function onSampleButtonStop() {
+    videoPlayer.stop();
+    const preEl = uploadSection?.querySelector('pre');
+    if (!preEl) return
+    preEl.textContent = '';
+
+    if (!uploadSection) return
+    const button = document.getElementById('sample-video-btn') as HTMLButtonElement | null;
+    if (!button) return
+    button.onclick = onSampleButtonClick;
+}
+
+function onVideoPlayerInit() {
+    if (!uploadSection) return
+    
+    const button = document.getElementById('sample-video-btn') as HTMLButtonElement | null;
+    if (!button) return
+
+    button.onclick = onSampleButtonClick;
+    
+}
+
 async function onWebcamStart() {
     if (!webcamSection) return
     const preEl = webcamSection.querySelector('pre')
@@ -86,6 +136,7 @@ async function onWebcamInit() {
 }
 
 async function onConvertButtonClick() {
+    onSampleButtonStop();
     const preEl = uploadSection!.querySelector('pre')
     if (!preEl) return
 
@@ -114,7 +165,7 @@ function onUploadInit() {
     webcamSection?.setAttribute('hidden', '')
     if (!uploadSection) return
     uploadSection.removeAttribute('hidden')
-    const button = uploadSection.querySelector('button')
+    const button = document.getElementById('upload-btn') as HTMLButtonElement | null
     if (!button) return
     
     const preEl = uploadSection.querySelector('pre')
@@ -122,6 +173,7 @@ function onUploadInit() {
 
     
     button.onclick = onConvertButtonClick
+    onVideoPlayerInit();
 }
 
 function handleActiveTab() {

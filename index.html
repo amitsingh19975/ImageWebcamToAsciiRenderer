@@ -21,7 +21,14 @@
                 <a href="#webcam" role="tab" class="tab active" aria-selected="false">Webcam</a>
             </div>
             <section id="upload" role="tabpanel" class="tab-panel" aria-labelledby="upload-tab" hidden>
-                <button id="upload-btn" class="border px-2 py-1 hover:bg-zinc-700 active:bg-zinc-800 w-[8ch] flex-grow-0">Convert</button>
+                <ul role="group" class="flex gap-4 mb-1">
+                    <li>
+                        <button id="upload-btn" class="border px-2 py-1 hover:bg-zinc-700 active:bg-zinc-800 w-[15ch] flex-grow-0">Convert</button>
+                    </li>
+                    <li>
+                        <button id="sample-video-btn" class="px-2 py-1 hover:bg-zinc-700 active:bg-zinc-800 w-[15ch] flex-grow-0">Sample Video</button>
+                    </li>
+                </ul>
                 <pre class="flex-1 max-w-[90vw] max-h-[70vh] overflow-auto"></pre>
             </section>
             <section id="webcam" role="tabpanel" class="tab-panel gap-1" aria-labelledby="webcam-tab">
